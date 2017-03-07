@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'CMTabbarView_Example' do
+  pod 'CMTabbarView', :path => '../'
+
+  target 'CMTabbarView_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
