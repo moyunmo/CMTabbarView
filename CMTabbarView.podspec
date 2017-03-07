@@ -8,25 +8,16 @@
 
 Pod::Spec.new do |s|
   s.name             = 'CMTabbarView'
-  s.version          = '0.1.0'
-  s.summary          = 'A short description of CMTabbarView.'
+  s.version          = '0.0.1'
+  s.summary          = 'CMTabbarView is a scrolling tab bar,provides a simple to implement view like '
 
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!
+  s.description      = 'CMTabbarView is a scrolling tab bar,provides a simple to implement view like NetEase News'
 
-  s.description      = <<-DESC
-TODO: Add long description of the pod here.
-                       DESC
-
-  s.homepage         = 'https://github.com/momo605654602@gmail.com/CMTabbarView'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
+  s.homepage         = 'https://github.com/moyunmo/CMTabbarView'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'momo605654602@gmail.com' => 'moyunmo@hotmail.com' }
-  s.source           = { :git => 'https://github.com/momo605654602@gmail.com/CMTabbarView.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.source           = { :git => 'https://github.com/moyunmo/CMTabbarView.git', :tag => s.version.to_s }
+  # s.social_media_url = ''
 
   s.ios.deployment_target = '8.0'
 
