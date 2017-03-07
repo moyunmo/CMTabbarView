@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
 
   s.homepage         = 'https://github.com/moyunmo/CMTabbarView'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'moyunmo@hotmail.com' }
+  s.author           = { 'momo605654602@gmail.com' => 'moyunmo@hotmail.com' }
   s.source           = { :git => 'https://github.com/moyunmo/CMTabbarView.git', :tag => s.version.to_s }
   # s.social_media_url = ''
 
