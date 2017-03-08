@@ -10,7 +10,6 @@
 
 @interface CMTabbarCollectionViewCell ()
 {
-    BOOL isSelected;
 }
 @property (strong, nonatomic) UILabel *titleLabel;
 
@@ -37,6 +36,12 @@
     return self;
 }
 
+- (void)prepareForReuse
+{
+    self.title = nil;
+    self.textColor = nil;
+}
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
@@ -51,17 +56,13 @@
 - (void)setTextFont:(UIFont *)textFont
 {
     _textFont = textFont;
-    if (!isSelected) {
-        self.titleLabel.font = textFont;
-    }
+    self.titleLabel.font = textFont;
 }
 
 - (void)setTextColor:(UIColor *)textColor
 {
     _textColor = textColor;
-    if (!isSelected) {
-        self.titleLabel.textColor = textColor;
-    }
+    self.titleLabel.textColor = textColor;
 }
 
 @end

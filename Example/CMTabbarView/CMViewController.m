@@ -23,7 +23,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.datas = @[@"Moyun",@"Penny",@"MoyunMoyun",@"Penny",@"M",@"Pe",@"Moy",@"Penn",@"Moyun",@"Penny"];
+    self.datas = @[@"Moyun",@"Penny",@"MoyunMoyun",@"M",@"Pe",@"Moy",@"Moyun",@"Penny",@"Swift",@"Cbjective-C",@"C++",@"JAVA",@"C"];
     [self.view addSubview:self.collectionView];
     [self.view addSubview:self.tabbarView];
 }
@@ -48,7 +48,7 @@
     if (!_collectionView) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-        layout.itemSize = CGSizeMake(self.view.bounds.size.width, 700);
+        layout.itemSize = CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height);
         layout.sectionInset = UIEdgeInsetsZero;
         layout.minimumLineSpacing = 0;
         layout.minimumInteritemSpacing = 0;
@@ -75,7 +75,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 10;
+    return self.datas.count;
 }
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath

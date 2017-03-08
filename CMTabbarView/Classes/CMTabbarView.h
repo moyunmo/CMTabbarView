@@ -93,4 +93,6 @@ extern NSString *const CMTabBoxBackgroundColor;
  */
 - (void)setTabIndex:(NSInteger)index animated:(BOOL)animated;
 
+- (void)reloadData;
+
 @end

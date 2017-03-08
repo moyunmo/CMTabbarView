@@ -20,6 +20,18 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
 
 #define CMHEXCOLOR(c) [UIColor colorWithRed:((c>>16)&0xFF)/255.0 green:((c>>8)&0xFF)/255.0 blue:(c&0xFF)/255.0 alpha:1.0]
 
+@interface CMTabbarItem : NSObject
+
+@property (assign, nonatomic, getter=isSelected) BOOL selected;
+
+@property (copy,   nonatomic) NSString *tabTitle;
+
+@end
+
+@implementation CMTabbarItem
+
+@end
+
 @interface CMTabbarView ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
 @property (strong, nonatomic) UICollectionView *collectionView;
@@ -96,7 +108,8 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
         _collectionView.dataSource = self;
         _collectionView.delegate = self;
         _collectionView.showsHorizontalScrollIndicator = false;
-        self.collectionView.backgroundColor = [UIColor clearColor];
+        _collectionView.scrollEnabled = _scrollEnable;
+        _collectionView.backgroundColor = [UIColor clearColor];
     }
     return _collectionView;
 }
@@ -115,9 +128,6 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    if ([self.dataSource respondsToSelector:@selector(tabbarTitlesForTabbarView:)]) {
-        self.tabbarTitles = [self.dataSource tabbarTitlesForTabbarView:self];
-    }
     return self.tabbarTitles.count;
 }
 
@@ -125,7 +135,9 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
 {
     CMTabbarCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([CMTabbarCollectionViewCell class]) forIndexPath:indexPath];
     [self updateCellInterface:cell];
-    cell.title = [self titleAtIndex:indexPath.row];
+    CMTabbarItem *item = self.tabbarTitles[indexPath.row];
+    cell.title = item.tabTitle;
+    cell.textColor = item.isSelected ? self.selectedAttributes[NSForegroundColorAttributeName] : self.normalAttributes[NSForegroundColorAttributeName];
     if ((!self.haveShowedDefault && indexPath.row == self.defaultSelectedIndex)) {
         _haveShowedDefault = true;
         [self updateTabWithCurrentCell:cell nextCell:nil progress:1.0f backwards:true];
@@ -138,7 +150,7 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
 {
     NSString *tabTitle = [self titleAtIndex:indexPath.row];
     CGSize size = [tabTitle sizeWithAttributes:self.normalAttributes];
-    return CGSizeMake(size.width+CMTabbarViewDefaultPadding, size.height+CMTabbarViewDefaultPadding);
+    return CGSizeMake(size.width+CMTabbarViewDefaultPadding, MIN(size.height+CMTabbarViewDefaultPadding, collectionView.bounds.size.height));
 }
 
 #pragma mark - UICollectionViewDeleagte
@@ -147,6 +159,7 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
 {
     self.isExecuting = true;
     [self setTabIndex:indexPath.row animated:true];
+    [collectionView reloadData];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.35f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.isExecuting = false;
     });
@@ -157,6 +170,36 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
 
 #pragma mark - Public Method
 
+- (void)setDataSource:(id<CMTabbarViewDatasouce>)dataSource
+{
+    NSParameterAssert(dataSource);
+    _dataSource = dataSource;
+    [self reloadData];
+}
+
+- (void)reloadData
+{
+    NSAssert([_dataSource respondsToSelector:@selector(tabbarTitlesForTabbarView:)], @"Method must be implement");
+    NSArray *array = [_dataSource tabbarTitlesForTabbarView:self];
+    NSMutableArray *mutaArray = [NSMutableArray array];
+    for (NSString *str in array) {
+        @autoreleasepool {
+            CMTabbarItem *item = [[CMTabbarItem alloc] init];
+            item.tabTitle = str;
+            item.selected = false;
+            [mutaArray addObject:item];
+        }
+    }
+    self.tabbarTitles = [mutaArray copy];
+    [self.collectionView reloadData];
+}
+
+- (void)setScrollEnable:(BOOL)scrollEnable
+{
+    _scrollEnable = scrollEnable;
+    self.collectionView.scrollEnabled = scrollEnable;
+}
+
 - (void)setTabPadding:(CGFloat)tabPadding
 {
     _tabPadding = tabPadding;
@@ -165,6 +208,7 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
 
 - (void)setTabIndex:(NSInteger)index animated:(BOOL)animated
 {
+    [self setSelectedWithIndex:index];
     if (animated) {
         [UIView animateWithDuration:CMTabbarViewDefaultAnimateTime animations:^{
             [self updateTabbarForIndex:index animated:false];
@@ -230,9 +274,16 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
 
 #pragma mark - Private Method
 
-- (void)reloadData
+- (void)setSelectedWithIndex:(NSInteger)index
 {
-    [self.collectionView reloadData];
+    for (NSUInteger ind = 0; ind < self.tabbarTitles.count; ind++) {
+        @autoreleasepool {
+            CMTabbarItem *item = self.tabbarTitles[ind];
+            item.selected = false;
+        }
+    }
+    CMTabbarItem *item = self.tabbarTitles[index];
+    item.selected = true;
 }
 
 - (void)updateTabbarForIndex:(NSInteger)index animated:(BOOL)animated
@@ -312,7 +363,7 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
 
 - (NSString *)titleAtIndex:(NSInteger)index
 {
-    return self.tabbarTitles[index];
+    return [self.tabbarTitles[index] valueForKey:@"tabTitle"];
 }
 
 - (void)updateTabbarForTabbarOffset:(CGFloat)tabOffset
@@ -326,6 +377,10 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
         [self updateTabIndicatorWithCurrentCell:cell nextCell:cell progress:1.0f];
     } else if (tabOffset >= self.tabbarTitles.count - 1) {
         CMTabbarCollectionViewCell *cell = [self cellAtIndex:self.tabbarTitles.count - 1];
+        if (![self.collectionView.visibleCells containsObject:cell]) { //fix edge
+            [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:self.tabbarTitles.count - 1 inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:false];
+            return ;
+        }
         [self updateTabWithCurrentCell:cell nextCell:cell progress:1.0f backwards:false];
         [self updateTabIndicatorWithCurrentCell:cell nextCell:cell progress:1.0f];
     } else {
@@ -334,6 +389,9 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
             NSInteger nextTabIndex = MAX(0, MIN(self.tabbarTitles.count - 1, isBackwards ? floor(tabOffset) : ceil(tabOffset)));
             CMTabbarCollectionViewCell *currentCell = [self cellAtIndex:currentTabIndex];
             CMTabbarCollectionViewCell *nextCell = [self cellAtIndex:nextTabIndex];
+            if (![self.collectionView.visibleCells containsObject:currentCell] && ![self.collectionView.visibleCells containsObject:nextCell]) {
+                [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:currentTabIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:false];
+            }
             if ((currentCell && nextCell) && currentCell != nextCell) {
                 [self updateTabWithCurrentCell:currentCell nextCell:nextCell progress:progress backwards:isBackwards];
                 [self updateTabIndicatorWithCurrentCell:currentCell nextCell:nextCell progress:progress];
@@ -344,6 +402,8 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
             NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
             if (cell && indexPath) {
                 [self updateIndicatorWithCell:cell indexPath:indexPath animate:true];
+                [self setSelectedWithIndex:index];
+                [self.collectionView setNeedsLayout];
             }
         }
     }
