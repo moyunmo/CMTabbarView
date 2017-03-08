@@ -276,9 +276,8 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
 
 - (void)setSelectedWithIndex:(NSInteger)index
 {
-    for (NSUInteger ind = 0; ind < self.tabbarTitles.count; ind++) {
+    for (CMTabbarItem *item in self.tabbarTitles) {
         @autoreleasepool {
-            CMTabbarItem *item = self.tabbarTitles[ind];
             item.selected = false;
         }
     }
