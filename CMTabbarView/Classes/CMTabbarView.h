@@ -48,7 +48,7 @@ extern NSString *const CMTabBoxBackgroundColor;
 /**
  Whether the user need color Gradient,Default is true
  */
-@property (assign, nonatomic) BOOL needGradient;
+@property (assign, nonatomic) BOOL needTextGradient;
 /**
  Specifies the type of selection
  Default is CMTabbarSelectionIndicator

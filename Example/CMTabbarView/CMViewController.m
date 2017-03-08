@@ -35,6 +35,10 @@
         _tabbarView.backgroundColor = [UIColor whiteColor];
         _tabbarView.delegate = self;
         _tabbarView.dataSource = self;
+        _tabbarView.indicatorAttributes = @{CMTabIndicatorColor:[UIColor orangeColor]};
+        _tabbarView.normalAttributes = @{NSForegroundColorAttributeName:[UIColor blackColor]};
+        _tabbarView.selectedAttributes = @{NSForegroundColorAttributeName:[UIColor orangeColor]};
+        _tabbarView.needTextGradient = true;
     }
     return _tabbarView;
 }

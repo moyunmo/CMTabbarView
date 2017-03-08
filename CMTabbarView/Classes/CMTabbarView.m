@@ -59,7 +59,7 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
     self.backgroundColor = [UIColor yellowColor];
     _scrollEnable = true;
     _tabPadding = 5.0f;
-    _needGradient = true;
+    _needTextGradient = true;
     _tabbarOffsetX = CMTabBarViewTabOffsetInvalid;
     _selectionType = CMTabbarSelectionIndicator;
     _locationType = CMTabbarIndicatorLocationDown;
@@ -351,16 +351,18 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
 
 - (void)updateTabWithCurrentCell:(CMTabbarCollectionViewCell *)currentCell nextCell:(CMTabbarCollectionViewCell *)nextCell progress:(CGFloat)progress backwards:(BOOL)backwards
 {
-    if (!_needGradient) {
-        //return ;
-    }
     if (backwards) {
         CMTabbarCollectionViewCell *temp = nextCell;
         nextCell = currentCell;
         currentCell = temp;
     }
-    currentCell.textColor =  [self getColorOfPercent:progress between:self.normalAttributes[NSForegroundColorAttributeName] and:self.selectedAttributes[NSForegroundColorAttributeName]];
-    nextCell.textColor = [self getColorOfPercent:progress between:self.selectedAttributes[NSForegroundColorAttributeName] and:self.normalAttributes[NSForegroundColorAttributeName]];
+    if (!_needTextGradient) {
+        currentCell.textColor = progress > .8f ? self.normalAttributes[NSForegroundColorAttributeName] : self.selectedAttributes[NSForegroundColorAttributeName];
+        nextCell.textColor = progress > .8f ?  self.selectedAttributes[NSForegroundColorAttributeName] : self.normalAttributes[NSForegroundColorAttributeName];
+    } else {
+        currentCell.textColor =  [self getColorOfPercent:progress between:self.normalAttributes[NSForegroundColorAttributeName] and:self.selectedAttributes[NSForegroundColorAttributeName]];
+        nextCell.textColor = [self getColorOfPercent:progress between:self.selectedAttributes[NSForegroundColorAttributeName] and:self.normalAttributes[NSForegroundColorAttributeName]];
+    }
 }
 
 - (void)updateTabIndicatorWithCurrentCell:(CMTabbarCollectionViewCell *)currentCell nextCell:(CMTabbarCollectionViewCell *)nextCell progress:(CGFloat)progress
