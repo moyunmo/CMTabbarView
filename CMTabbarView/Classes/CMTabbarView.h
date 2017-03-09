@@ -83,7 +83,13 @@ extern NSString *const CMTabBoxBackgroundColor;
  User default index
  */
 @property (assign, nonatomic) NSUInteger defaultSelectedIndex;
-
+/**
+  Content Inset
+ */
+@property (assign, nonatomic) UIEdgeInsets contentInset;
+/**
+ The tab offsetX of the View.
+ */
 @property (assign, nonatomic) CGFloat tabbarOffsetX;
 /**
  Set the current selected tab

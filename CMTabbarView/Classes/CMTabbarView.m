@@ -14,6 +14,7 @@ CGFloat const CMTabBarViewTabOffsetInvalid = -1.0f;
 CGFloat const CMTabbarViewDefaultPadding = 10.0f;
 CGFloat const CMTabbarSelectionBoxDefaultTop = 6.0f;
 CGFloat const CMTabbarViewDefaultAnimateTime = .2f;
+CGFloat const CMTabbarViewDefaultHorizontalInset = 7.5f;
 NSString *  const CMTabIndicatorViewHeight = @"CMIndicatorViewHeight";
 NSString *  const CMTabIndicatorColor = @"CMIndicatorViewColor";
 NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
@@ -75,6 +76,7 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
     _tabbarOffsetX = CMTabBarViewTabOffsetInvalid;
     _selectionType = CMTabbarSelectionIndicator;
     _locationType = CMTabbarIndicatorLocationDown;
+    _contentInset = UIEdgeInsetsMake(.0f, CMTabbarViewDefaultHorizontalInset, 0, CMTabbarViewDefaultHorizontalInset);
     _indicatorAttributes = @{CMTabIndicatorColor:CMHEXCOLOR(0x3ebd6e),CMTabIndicatorViewHeight:@(2.0f),CMTabBoxBackgroundColor:[UIColor orangeColor]};
     _normalAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:15.0f],NSForegroundColorAttributeName:CMHEXCOLOR(0x6d7989)};
     _selectedAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:15.0f],NSForegroundColorAttributeName:CMHEXCOLOR(0x3ebd6e)};
@@ -110,6 +112,7 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
         _collectionView.showsHorizontalScrollIndicator = false;
         _collectionView.scrollEnabled = _scrollEnable;
         _collectionView.backgroundColor = [UIColor clearColor];
+        _collectionView.contentInset = self.contentInset;
     }
     return _collectionView;
 }
@@ -194,6 +197,13 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
     [self.collectionView reloadData];
 }
 
+- (void)setContentInset:(UIEdgeInsets)contentInset
+{
+    _contentInset = contentInset;
+    contentInset.bottom += [self.indicatorAttributes[CMTabIndicatorViewHeight] floatValue];
+    self.collectionView.contentInset = contentInset;
+}
+
 - (void)setScrollEnable:(BOOL)scrollEnable
 {
     _scrollEnable = scrollEnable;
@@ -203,7 +213,7 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
 - (void)setTabPadding:(CGFloat)tabPadding
 {
     _tabPadding = tabPadding;
-    [self reloadData];
+    [self.collectionView reloadData];
 }
 
 - (void)setTabIndex:(NSInteger)index animated:(BOOL)animated
@@ -328,7 +338,7 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
         self.indicatorView.frame = CGRectMake(originX-CMTabbarViewDefaultPadding/2, CMTabbarSelectionBoxDefaultTop, width+CMTabbarViewDefaultPadding, self.collectionView.frame.size.height-2*CMTabbarSelectionBoxDefaultTop);
     }
     CGFloat scrollViewX = MAX(0, originX+width/2 - self.collectionView.bounds.size.width / 2.0f);
-    [self.collectionView scrollRectToVisible:CGRectMake(scrollViewX, self.collectionView.frame.origin.y, self.collectionView.frame.size.width, self.collectionView.frame.size.height) animated:false];
+    [self.collectionView scrollRectToVisible:CGRectMake(scrollViewX, self.collectionView.frame.origin.y, self.collectionView.frame.size.width - self.contentInset.left - self.contentInset.right, self.collectionView.frame.size.height) animated:false];
 }
 
 - (CMTabbarCollectionViewCell *)cellAtIndex:(NSInteger)index
