@@ -31,14 +31,15 @@
 - (CMTabbarView *)tabbarView
 {
     if (!_tabbarView) {
-        _tabbarView = [[CMTabbarView alloc] initWithFrame:CGRectMake(0, 20, self.view.bounds.size.width, 40)];
+        _tabbarView = [[CMTabbarView alloc] initWithFrame:CGRectMake(50, 20, self.view.bounds.size.width-100, 40)];
         _tabbarView.backgroundColor = [UIColor whiteColor];
         _tabbarView.delegate = self;
         _tabbarView.dataSource = self;
-        _tabbarView.indicatorAttributes = @{CMTabIndicatorColor:[UIColor orangeColor]};
-        _tabbarView.normalAttributes = @{NSForegroundColorAttributeName:[UIColor blackColor]};
-        _tabbarView.selectedAttributes = @{NSForegroundColorAttributeName:[UIColor orangeColor]};
-        _tabbarView.needTextGradient = true;
+        //_tabbarView.indicatorAttributes = @{CMTabIndicatorColor:[UIColor orangeColor]};
+        //_tabbarView.normalAttributes = @{NSForegroundColorAttributeName:[UIColor blackColor]};
+        //_tabbarView.selectedAttributes = @{NSForegroundColorAttributeName:[UIColor orangeColor]};
+        //_tabbarView.needTextGradient = true;
+        //_tabbarView.defaultSelectedIndex = 5;
     }
     return _tabbarView;
 }
@@ -58,6 +59,7 @@
         _collectionView.delegate = self;
         _collectionView.showsHorizontalScrollIndicator = false;
         _collectionView.pagingEnabled = true;
+        //_collectionView.contentOffset = CGPointMake(self.view.bounds.size.width*5, 0);
         _collectionView.backgroundColor = [UIColor whiteColor];
     }
     return _collectionView;
