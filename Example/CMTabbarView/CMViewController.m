@@ -31,7 +31,7 @@
 - (CMTabbarView *)tabbarView
 {
     if (!_tabbarView) {
-        _tabbarView = [[CMTabbarView alloc] initWithFrame:CGRectMake(50, 20, self.view.bounds.size.width-100, 40)];
+        _tabbarView = [[CMTabbarView alloc] initWithFrame:CGRectMake(0, 20, self.view.bounds.size.width, 40)];
         _tabbarView.backgroundColor = [UIColor whiteColor];
         _tabbarView.delegate = self;
         _tabbarView.dataSource = self;
