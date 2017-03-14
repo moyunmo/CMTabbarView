@@ -1,5 +1,7 @@
 # CMTabbarView
 
+![](1.gif)
+
 [![CI Status](http://img.shields.io/travis/momo605654602@gmail.com/CMTabbarView.svg?style=flat)](https://travis-ci.org/momo605654602@gmail.com/CMTabbarView)
 [![Version](https://img.shields.io/cocoapods/v/CMTabbarView.svg?style=flat)](http://cocoapods.org/pods/CMTabbarView)
 [![License](https://img.shields.io/cocoapods/l/CMTabbarView.svg?style=flat)](http://cocoapods.org/pods/CMTabbarView)
@@ -20,6 +22,21 @@ it, simply add the following line to your Podfile:
 
 ```ruby
 pod "CMTabbarView"
+```
+
+## Usage
+You can create menu view
+
+```
+tabbarView = [[CMTabbarView alloc] initWithFrame:CGRectMake(0, 20, self.view.bounds.size.width, 40)];
+tabbarView.delegate = self;
+tabbarView.dataSource = self;
+```
+
+You need implement the protocol
+
+```
+- (NSArray<NSString *> *)tabbarTitlesForTabbarView:(CMTabbarView *)tabbarView;
 ```
 
 ## Author
