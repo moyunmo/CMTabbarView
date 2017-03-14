@@ -35,12 +35,11 @@
         _tabbarView = [[CMTabbarView alloc] initWithFrame:CGRectMake(0, 20, self.view.bounds.size.width, 40)];
         _tabbarView.delegate = self;
         _tabbarView.dataSource = self;
-        _tabbarView.selectionType = CMTabbarSelectionBox;
+        //_tabbarView.selectionType = CMTabbarSelectionBox;
         //_tabbarView.indicatorAttributes = @{CMTabIndicatorColor:[UIColor orangeColor]};
         //_tabbarView.normalAttributes = @{NSForegroundColorAttributeName:[UIColor blackColor]};
         //_tabbarView.selectedAttributes = @{NSForegroundColorAttributeName:[UIColor orangeColor]};
-        _tabbarView.needTextGradient = false;
-        _tabbarView.selectedAttributes = @{NSForegroundColorAttributeName:MHEXCOLOR(0x6d7989)};
+        //_tabbarView.needTextGradient = false;
         //_tabbarView.defaultSelectedIndex = 5;
     }
     return _tabbarView;
