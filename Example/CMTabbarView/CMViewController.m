@@ -9,7 +9,8 @@
 #import "CMViewController.h"
 #import "CMTabbarView.h"
 #import "CMTabbarCollectionViewCell.h"
-#define MHEXCOLOR(c) [UIColor colorWithRed:((c>>16)&0xFF)/255.0 green:((c>>8)&0xFF)/255.0 blue:(c&0xFF)/255.0 alpha:1.0]
+
+static NSUInteger const kCMDefaultSelected = 2;
 
 @interface CMViewController ()<CMTabbarViewDelegate,CMTabbarViewDatasouce,UICollectionViewDataSource,UICollectionViewDelegate>
 
@@ -24,7 +25,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.datas = @[@"Moyun",@"Penny",@"MoyunMoyun",@"M",@"Pe",@"Moy",@"Moyun",@"Penny",@"Swift",@"Cbjective-C",@"C++",@"JAVA",@"C"];
+    self.datas = @[@"Moyun",@"Penny",@"MoyunMoyun",@"M",@"Pe",@"Moy",@"Moyun",@"Penny",@"Swift",@"Objective-C",@"C++",@"JAVA",@"C"];
     [self.view addSubview:self.collectionView];
     [self.view addSubview:self.tabbarView];
 }
@@ -35,12 +36,12 @@
         _tabbarView = [[CMTabbarView alloc] initWithFrame:CGRectMake(0, 20, self.view.bounds.size.width, 40)];
         _tabbarView.delegate = self;
         _tabbarView.dataSource = self;
+        _tabbarView.defaultSelectedIndex = kCMDefaultSelected;
         //_tabbarView.selectionType = CMTabbarSelectionBox;
         //_tabbarView.indicatorAttributes = @{CMTabIndicatorColor:[UIColor orangeColor]};
         //_tabbarView.normalAttributes = @{NSForegroundColorAttributeName:[UIColor blackColor]};
         //_tabbarView.selectedAttributes = @{NSForegroundColorAttributeName:[UIColor orangeColor]};
         //_tabbarView.needTextGradient = false;
-        //_tabbarView.defaultSelectedIndex = 5;
     }
     return _tabbarView;
 }
@@ -60,7 +61,7 @@
         _collectionView.delegate = self;
         _collectionView.showsHorizontalScrollIndicator = false;
         _collectionView.pagingEnabled = true;
-        //_collectionView.contentOffset = CGPointMake(self.view.bounds.size.width*5, 0);
+        _collectionView.contentOffset = CGPointMake(self.view.bounds.size.width*kCMDefaultSelected, 0);
         _collectionView.backgroundColor = [UIColor whiteColor];
     }
     return _collectionView;
