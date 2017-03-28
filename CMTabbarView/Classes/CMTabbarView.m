@@ -80,6 +80,7 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
     _normalAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:15.0f],NSForegroundColorAttributeName:CMHEXCOLOR(0x6d7989)};
     _selectedAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:15.0f],NSForegroundColorAttributeName:CMHEXCOLOR(0x3ebd6e)};
     _defaultSelectedIndex = 0;
+    self.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)willMoveToSuperview:(UIView *)newSuperview
