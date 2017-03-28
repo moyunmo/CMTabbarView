@@ -93,6 +93,9 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
         NSString *horizontalConstraints = [NSString stringWithFormat:@"H:|-%f-[_collectionView]-%f-|",.0,.0];
         [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:horizontalConstraints options:0 metrics:nil views:views]];
         [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:verticalConstraints options:0 metrics:nil views:views]];
+        if (!_defaultSelectedIndex) {
+            [self setDefaultSelectedIndex:0];
+        }
     }
     if (!self.indicatorView.superview) {
         [self.collectionView addSubview:self.indicatorView];
