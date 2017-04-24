@@ -10,7 +10,9 @@
 #endif
 #endif
 
+#import "CMTabbarCollectionViewCell.h"
+#import "CMTabbarView.h"
 
-FOUNDATION_EXPORT double Pods_CMTabbarView_ExampleVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_CMTabbarView_ExampleVersionString[];
+FOUNDATION_EXPORT double CMTabbarViewVersionNumber;
+FOUNDATION_EXPORT const unsigned char CMTabbarViewVersionString[];
 

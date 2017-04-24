@@ -25,8 +25,7 @@ static NSUInteger const kCMDefaultSelected = 2;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    [self.view addSubview:self.collectionView];
+    [self.view insertSubview:self.collectionView belowSubview:self.tabbarView];
     [self.view addSubview:self.tabbarView];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
