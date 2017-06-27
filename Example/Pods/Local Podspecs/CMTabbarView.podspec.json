@@ -1,7 +1,7 @@
 {
   "name": "CMTabbarView",
-  "version": "0.0.1",
-  "summary": "CMTabbarView is a scrolling tab bar,provides a simple to implement view like",
+  "version": "0.1.1",
+  "summary": "CMTabbarView is a scrolling tab bar,provides a simple to implement view",
   "description": "CMTabbarView is a scrolling tab bar,provides a simple to implement view like NetEase News",
   "homepage": "https://github.com/moyunmo/CMTabbarView",
   "license": {
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/moyunmo/CMTabbarView.git",
-    "tag": "0.0.1"
+    "tag": "0.1.1"
   },
   "platforms": {
     "ios": "8.0"

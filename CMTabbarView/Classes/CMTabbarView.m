@@ -67,6 +67,14 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
     return self;
 }
 
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [super initWithCoder:aDecoder]) {
+        [self commonInit];
+    }
+    return self;
+}
+
 - (void)commonInit
 {
     _scrollEnable = true;
@@ -187,7 +195,7 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
 
 - (void)reloadData
 {
-    NSAssert([_dataSource respondsToSelector:@selector(tabbarTitlesForTabbarView:)], @"Method must be implement");
+    NSAssert([_dataSource respondsToSelector:@selector(tabbarTitlesForTabbarView:)], @"'tabbarTitlesForTabbarView' Method must be implement");
     NSArray *array = [_dataSource tabbarTitlesForTabbarView:self];
     if (!array.count) {
         return ;
@@ -255,7 +263,7 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
 
 - (void)setDefaultSelectedIndex:(NSUInteger)defaultSelectedIndex
 {
-    if (self.tabbarOffsetX == CMTabBarViewTabOffsetInvalid) {
+    if ((self.tabbarOffsetX == CMTabBarViewTabOffsetInvalid) || (_defaultSelectedIndex != defaultSelectedIndex)) {
         self.haveShowedDefault = false;
         _tabbarOffsetX = defaultSelectedIndex;
         _defaultSelectedIndex = defaultSelectedIndex;

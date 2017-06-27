@@ -9,3 +9,8 @@ target 'CMTabbarView_Example' do
     
   end
 end
+
+
+target 'StoryboardDemo' do
+    pod 'CMTabbarView', :path => '../'
+end

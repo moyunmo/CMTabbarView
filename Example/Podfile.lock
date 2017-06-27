@@ -1,16 +1,16 @@
 PODS:
-  - CMTabbarView (0.0.1)
+  - CMTabbarView (0.1.1)
 
 DEPENDENCIES:
   - CMTabbarView (from `../`)
 
 EXTERNAL SOURCES:
   CMTabbarView:
-    :path: ../
+    :path: "../"
 
 SPEC CHECKSUMS:
-  CMTabbarView: a8c968d1b3d98f056ad13729e912b7fdf80acc1d
+  CMTabbarView: 6a66fa1f17a0c789c8484c26d7bd17fd6189fa7e
 
-PODFILE CHECKSUM: eca748300848c10dafb74c30740543a7cd4b414f
+PODFILE CHECKSUM: e20a7fa3876fcc3ac4fbee683a47de3e03171fb0
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.2.0
