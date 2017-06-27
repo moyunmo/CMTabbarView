@@ -107,6 +107,8 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
 {
     if (!_collectionView) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+        layout.minimumLineSpacing = CMTabbarViewDefaultPadding;
+        layout.minimumInteritemSpacing = CMTabbarViewDefaultPadding;
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
         [_collectionView registerClass:[CMTabbarCollectionViewCell class] forCellWithReuseIdentifier:NSStringFromClass([CMTabbarCollectionViewCell class])];
@@ -191,13 +193,26 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
         return ;
     }
     NSMutableArray *mutaArray = [NSMutableArray array];
+    
+    CGFloat allWidth = 0.0;
     for (NSString *str in array) {
         @autoreleasepool {
             CMTabbarItem *item = [[CMTabbarItem alloc] init];
             item.tabTitle = str;
             item.selected = false;
             [mutaArray addObject:item];
+            
+            CGSize size = [str sizeWithAttributes:self.normalAttributes];
+            allWidth += size.width + CMTabbarViewDefaultPadding;
         }
+    }
+    if (allWidth + (array.count+1) * CMTabbarViewDefaultPadding < self.collectionView.bounds.size.width) {
+        UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
+        CGFloat space = self.collectionView.bounds.size.width - allWidth + (array.count+1) * CMTabbarViewDefaultPadding;
+        CGFloat InteritemSpacing = space / (array.count+1) - CMTabbarViewDefaultPadding;
+        layout.minimumInteritemSpacing = InteritemSpacing;
+        layout.minimumLineSpacing = InteritemSpacing;
+        layout.sectionInset = UIEdgeInsetsMake(0, InteritemSpacing, 0, 0);
     }
     if (self.tabbarOffsetX == CMTabBarViewTabOffsetInvalid && _defaultSelectedIndex < mutaArray.count) {
         CMTabbarItem *item = mutaArray[_defaultSelectedIndex];

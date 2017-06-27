@@ -30,7 +30,8 @@ static NSUInteger const kCMDefaultSelected = 2;
     [self.view addSubview:self.tabbarView];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        self.datas = @[@"Moyun",@"Penny",@"MoyunMoyun",@"M",@"Pe",@"Moy",@"Moyun",@"Penny",@"Swift",@"Objective-C",@"C++",@"JAVA",@"C"];
+//        self.datas = @[@"Moyun",@"Penny",@"MoyunMoyun",@"M",@"Pe",@"Moy",@"Moyun",@"Penny",@"Swift",@"Objective-C",@"C++",@"JAVA",@"C"];
+        self.datas = @[@"Moyun",@"Penny"];
         [self.collectionView reloadData];
         [self.tabbarView reloadData];
         self.collectionView.contentOffset = CGPointMake(self.view.bounds.size.width*kCMDefaultSelected, 0);
