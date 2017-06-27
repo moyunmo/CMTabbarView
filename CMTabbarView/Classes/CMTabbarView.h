@@ -91,6 +91,8 @@ extern NSString *const CMTabBoxBackgroundColor;
  The tab offsetX of the View.
  */
 @property (assign, nonatomic) CGFloat tabbarOffsetX;
+
+@property (assign, nonatomic) BOOL needAutoCenter;
 /**
  Set the current selected tab
 

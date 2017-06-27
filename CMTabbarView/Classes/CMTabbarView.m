@@ -88,6 +88,7 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
     _normalAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:15.0f],NSForegroundColorAttributeName:CMHEXCOLOR(0x6d7989)};
     _selectedAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:15.0f],NSForegroundColorAttributeName:CMHEXCOLOR(0x3ebd6e)};
     _defaultSelectedIndex = 0;
+    _needAutoCenter = true;
     self.backgroundColor = [UIColor whiteColor];
 }
 
@@ -209,18 +210,21 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
             item.tabTitle = str;
             item.selected = false;
             [mutaArray addObject:item];
-            
-            CGSize size = [str sizeWithAttributes:self.normalAttributes];
-            allWidth += size.width + CMTabbarViewDefaultPadding;
+            if (_needAutoCenter) {
+                CGSize size = [str sizeWithAttributes:self.normalAttributes];
+                allWidth += size.width + CMTabbarViewDefaultPadding;
+            }
         }
     }
-    if (allWidth + (array.count+1) * CMTabbarViewDefaultPadding < self.collectionView.bounds.size.width) {
-        UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
-        CGFloat space = self.collectionView.bounds.size.width - allWidth + (array.count+1) * CMTabbarViewDefaultPadding;
-        CGFloat InteritemSpacing = space / (array.count+1) - CMTabbarViewDefaultPadding;
-        layout.minimumInteritemSpacing = InteritemSpacing;
-        layout.minimumLineSpacing = InteritemSpacing;
-        layout.sectionInset = UIEdgeInsetsMake(0, InteritemSpacing, 0, 0);
+    if (_needAutoCenter) {
+        if (allWidth + (array.count+1) * CMTabbarViewDefaultPadding < self.collectionView.bounds.size.width) {
+            UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
+            CGFloat space = self.collectionView.bounds.size.width - allWidth + (array.count+1) * CMTabbarViewDefaultPadding;
+            CGFloat InteritemSpacing = space / (array.count+1) - CMTabbarViewDefaultPadding;
+            layout.minimumInteritemSpacing = InteritemSpacing;
+            layout.minimumLineSpacing = InteritemSpacing;
+            layout.sectionInset = UIEdgeInsetsMake(0, InteritemSpacing, 0, 0);
+        }
     }
     if (self.tabbarOffsetX == CMTabBarViewTabOffsetInvalid && _defaultSelectedIndex < mutaArray.count) {
         CMTabbarItem *item = mutaArray[_defaultSelectedIndex];
