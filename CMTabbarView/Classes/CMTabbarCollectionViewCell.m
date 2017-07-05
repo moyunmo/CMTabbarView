@@ -40,6 +40,7 @@
 {
     self.title = nil;
     self.textColor = nil;
+    [super prepareForReuse];
 }
 
 - (void)awakeFromNib {
