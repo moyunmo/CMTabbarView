@@ -10,7 +10,7 @@
 #import "CMTabbarView.h"
 #import "CMDemoCell.h"
 
-static NSInteger const kDefaultSelectedIndex = 2;
+static NSInteger const kDefaultSelectedIndex = 0;
 
 @interface ViewController ()<CMTabbarViewDelegate,CMTabbarViewDatasouce,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
