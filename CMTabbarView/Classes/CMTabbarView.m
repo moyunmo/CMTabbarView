@@ -363,7 +363,6 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
 
 - (void)updateIndicatorFrameWithOriginX:(CGFloat)originX width:(CGFloat)width
 {
-    NSLog(@"originX:%f, width:%f",originX,width);
     width -= self.tabPadding;
     originX += (self.tabPadding/2.0f);
     width -= self.tabPadding;
@@ -495,7 +494,7 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
     
     CGFloat newX = minX + ((maxX - minX) * progress);
     CGFloat newWidth = currentTabWidth + widthDiff;
-    [self updateIndicatorFrameWithOriginX:0 width:newWidth];
+    [self updateIndicatorFrameWithOriginX:newX width:newWidth];
 }
 
 - (UIColor *)getColorOfPercent:(CGFloat)percent between:(UIColor *)color1 and:(UIColor *)color2

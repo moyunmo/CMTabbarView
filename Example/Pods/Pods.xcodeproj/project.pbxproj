@@ -50,7 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0008A77BC488BBC4CD31D9737E193D09 /* Pods_CMTabbarView_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_CMTabbarView_Tests.framework; path = "Pods-CMTabbarView_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0008A77BC488BBC4CD31D9737E193D09 /* Pods_CMTabbarView_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CMTabbarView_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		061DD0949B82ED7EA10AEFD9B8746BE3 /* CMTabbarView-iOS8.0-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "CMTabbarView-iOS8.0-umbrella.h"; path = "../CMTabbarView-iOS8.0/CMTabbarView-iOS8.0-umbrella.h"; sourceTree = "<group>"; };
 		16C73E998C660C163BB607C22B51C637 /* Pods-StoryboardDemo-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-StoryboardDemo-resources.sh"; sourceTree = "<group>"; };
 		1802B15C5D9E78EE2B2D0A81B9C797DA /* Pods-CMTabbarView_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-CMTabbarView_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
@@ -60,27 +60,27 @@
 		33914491DCFD97AB17D62A2CDDEB9B8F /* Pods-CMTabbarView_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CMTabbarView_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		34DAF5B32A2BE10874D04EF5EDC1862E /* Pods-CMTabbarView_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CMTabbarView_Example.release.xcconfig"; sourceTree = "<group>"; };
 		358CECE75CE4EB17F8251081908DD96C /* CMTabbarView-iOS10.2.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "CMTabbarView-iOS10.2.xcconfig"; sourceTree = "<group>"; };
-		3B91570CB7F3257CFB7EA5EC86389D9B /* CMTabbarView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = CMTabbarView.framework; path = "CMTabbarView-iOS8.0.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B91570CB7F3257CFB7EA5EC86389D9B /* CMTabbarView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CMTabbarView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D74F5A682FCFB5082309F83E1CC9A8B /* Pods-StoryboardDemo-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-StoryboardDemo-dummy.m"; sourceTree = "<group>"; };
 		3E6864B407EABFF62CD477CB2AFDBC83 /* CMTabbarView-iOS8.0-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "CMTabbarView-iOS8.0-dummy.m"; path = "../CMTabbarView-iOS8.0/CMTabbarView-iOS8.0-dummy.m"; sourceTree = "<group>"; };
-		3E91C595A8347521AC1BEF5DBFFDF88F /* CMTabbarView-iOS10.2.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "CMTabbarView-iOS10.2.modulemap"; sourceTree = "<group>"; };
+		3E91C595A8347521AC1BEF5DBFFDF88F /* CMTabbarView-iOS10.2.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "CMTabbarView-iOS10.2.modulemap"; sourceTree = "<group>"; };
 		483014E83F2C7EF3E9A830126F35DFE1 /* Pods-StoryboardDemo-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-StoryboardDemo-frameworks.sh"; sourceTree = "<group>"; };
 		4E2933077D7E0CD46358F73E781AC03C /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		53D2A26D1D366CF6F1C4A0D94460177F /* CMTabbarView-iOS8.0-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "CMTabbarView-iOS8.0-prefix.pch"; path = "../CMTabbarView-iOS8.0/CMTabbarView-iOS8.0-prefix.pch"; sourceTree = "<group>"; };
 		5C471F6C2F2F9AF42F38994919BA68C8 /* CMTabbarView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CMTabbarView.m; sourceTree = "<group>"; };
 		65BDADFEB05A435659221925084B5EE4 /* CMTabbarView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CMTabbarView.h; sourceTree = "<group>"; };
 		6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		67E26B702969064D72C18A801391703F /* CMTabbarView-iOS8.0.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; name = "CMTabbarView-iOS8.0.modulemap"; path = "../CMTabbarView-iOS8.0/CMTabbarView-iOS8.0.modulemap"; sourceTree = "<group>"; };
+		67E26B702969064D72C18A801391703F /* CMTabbarView-iOS8.0.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; name = "CMTabbarView-iOS8.0.modulemap"; path = "../CMTabbarView-iOS8.0/CMTabbarView-iOS8.0.modulemap"; sourceTree = "<group>"; };
 		6D953F5F02D99211292C4A3ADFC9D052 /* Pods-StoryboardDemo-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-StoryboardDemo-acknowledgements.markdown"; sourceTree = "<group>"; };
 		749656C88353FC95F6803D63E9C520C2 /* Pods-CMTabbarView_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-CMTabbarView_Tests-umbrella.h"; sourceTree = "<group>"; };
-		788DE25956D620F14FF0A18475DCC7F5 /* Pods-CMTabbarView_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-CMTabbarView_Example.modulemap"; sourceTree = "<group>"; };
+		788DE25956D620F14FF0A18475DCC7F5 /* Pods-CMTabbarView_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-CMTabbarView_Example.modulemap"; sourceTree = "<group>"; };
 		7AE73BDBFBFE00DA8F79DE848D5F020A /* Pods-StoryboardDemo-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-StoryboardDemo-acknowledgements.plist"; sourceTree = "<group>"; };
 		7C49F8142E88F48A139B7BB4FA721DE4 /* Pods-StoryboardDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-StoryboardDemo.release.xcconfig"; sourceTree = "<group>"; };
 		83D0892EF5B3AFC170E43BA865F4562C /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = Info.plist; path = "../CMTabbarView-iOS8.0/Info.plist"; sourceTree = "<group>"; };
 		91199257DB75203C5380481B32D5D3E8 /* Pods-CMTabbarView_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CMTabbarView_Example-acknowledgements.plist"; sourceTree = "<group>"; };
-		91890E7C594891FF1524B3200CD88A87 /* Pods-StoryboardDemo.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-StoryboardDemo.modulemap"; sourceTree = "<group>"; };
+		91890E7C594891FF1524B3200CD88A87 /* Pods-StoryboardDemo.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-StoryboardDemo.modulemap"; sourceTree = "<group>"; };
 		930053825F07DEE360B14F57702AA618 /* CMTabbarView-iOS10.2-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CMTabbarView-iOS10.2-prefix.pch"; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9FA011982BC89924FE5B57E9CE7FF6EF /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A14AC5A489F809093D4AF085F4817342 /* CMTabbarView-iOS8.0.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "CMTabbarView-iOS8.0.xcconfig"; path = "../CMTabbarView-iOS8.0/CMTabbarView-iOS8.0.xcconfig"; sourceTree = "<group>"; };
 		A2EEEE557C03CD38CE1B083CF4189478 /* CMTabbarCollectionViewCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CMTabbarCollectionViewCell.m; sourceTree = "<group>"; };
@@ -91,15 +91,15 @@
 		B729C0579FEB12422DD2F6342DA47700 /* Pods-CMTabbarView_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-CMTabbarView_Tests-resources.sh"; sourceTree = "<group>"; };
 		BFAC9216DC31414AF9ED4C1BD13746FD /* Pods-StoryboardDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-StoryboardDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		C2C344B355E838B721FB70D931A7B346 /* CMTabbarView-iOS10.2-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CMTabbarView-iOS10.2-dummy.m"; sourceTree = "<group>"; };
-		C58480D48B01DE6BDC840D9592A2A6F3 /* Pods_StoryboardDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_StoryboardDemo.framework; path = "Pods-StoryboardDemo.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C58480D48B01DE6BDC840D9592A2A6F3 /* Pods_StoryboardDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StoryboardDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6574D8091F5651DBB0850E60F2C6A2E /* Pods-CMTabbarView_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-CMTabbarView_Example-resources.sh"; sourceTree = "<group>"; };
 		C9777CFE9FEA42AC8E7BEE9D5EC1F20F /* Pods-CMTabbarView_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-CMTabbarView_Tests-frameworks.sh"; sourceTree = "<group>"; };
-		CB3D5279741031D7E8222FE5237CCF6A /* Pods-CMTabbarView_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-CMTabbarView_Tests.modulemap"; sourceTree = "<group>"; };
+		CB3D5279741031D7E8222FE5237CCF6A /* Pods-CMTabbarView_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-CMTabbarView_Tests.modulemap"; sourceTree = "<group>"; };
 		CC503D26274129F02DC9EC5A51E2E7CA /* Pods-CMTabbarView_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-CMTabbarView_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
-		CFDA483D3A30B1DD762CBA16DE1A118B /* Pods_CMTabbarView_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_CMTabbarView_Example.framework; path = "Pods-CMTabbarView_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CFDA483D3A30B1DD762CBA16DE1A118B /* Pods_CMTabbarView_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CMTabbarView_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D07AB595040676499A53CACAEB82CAD2 /* Pods-CMTabbarView_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CMTabbarView_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		DE849CC811948CC5B22F4231A864A05F /* Pods-CMTabbarView_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-CMTabbarView_Example-umbrella.h"; sourceTree = "<group>"; };
-		E2671E1C1B6409C52C018D863393AEC8 /* CMTabbarView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = CMTabbarView.framework; path = "CMTabbarView-iOS10.2.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E2671E1C1B6409C52C018D863393AEC8 /* CMTabbarView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CMTabbarView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E82582CD50DFDAEFE91DA9895E739FE2 /* Pods-CMTabbarView_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-CMTabbarView_Example-frameworks.sh"; sourceTree = "<group>"; };
 		EAF85CECEC82CE1E38E89CFB7FBBC327 /* Pods-CMTabbarView_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CMTabbarView_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		F3013F150A77115774752DCADC6D9217 /* Pods-StoryboardDemo-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-StoryboardDemo-umbrella.h"; sourceTree = "<group>"; };
@@ -256,7 +256,6 @@
 				65BDADFEB05A435659221925084B5EE4 /* CMTabbarView.h */,
 				5C471F6C2F2F9AF42F38994919BA68C8 /* CMTabbarView.m */,
 			);
-			name = Classes;
 			path = Classes;
 			sourceTree = "<group>";
 		};
@@ -273,7 +272,6 @@
 			children = (
 				89CED3415D43B5389763166FA841B6FD /* Classes */,
 			);
-			name = CMTabbarView;
 			path = CMTabbarView;
 			sourceTree = "<group>";
 		};
@@ -455,7 +453,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0900;
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -551,7 +549,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -559,14 +559,20 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"POD_CONFIGURATION_RELEASE=1",
 					"$(inherited)",
@@ -839,7 +845,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -847,15 +855,21 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"POD_CONFIGURATION_DEBUG=1",
