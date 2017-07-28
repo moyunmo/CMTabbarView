@@ -7,7 +7,6 @@
 //
 
 #import "CMTabbarView.h"
-#import "CMTabbarCollectionViewCell.h"
 
 CGFloat const CMTabbarViewDefaultHeight = 44.0f;
 CGFloat const CMTabBarViewTabOffsetInvalid = -1.0f;
@@ -29,6 +28,22 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
 
 @end
 
+@interface CMTabbarCollectionViewCell : UICollectionViewCell
+
+@property (strong, nonatomic, nullable) UIColor *textColor;
+
+@property (strong, nonatomic, nullable) UIFont *textFont;
+
+@property (strong, nonatomic, nullable) UIColor *selectedTextColor;
+
+@property (strong, nonatomic, nullable) UIFont *selectedTextFont;
+
+@property (nonatomic, copy, nullable) NSString *title;
+
+@property (strong, nonatomic) UILabel *titleLabel;
+
+@end
+
 @implementation CMTabbarItem
 
 @end
@@ -46,6 +61,10 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
 @property (assign, nonatomic) CGFloat previousTabOffsetX;
 
 @property (assign, nonatomic) BOOL isExecuting;
+
+@property (assign, nonatomic) NSInteger defaultFlag;
+
+@property (assign, nonatomic) CGFloat allItemsWidth;
 
 @end
 
@@ -89,6 +108,7 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
     _selectedAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:15.0f],NSForegroundColorAttributeName:CMHEXCOLOR(0x3ebd6e)};
     _defaultSelectedIndex = 0;
     _needAutoCenter = true;
+    _defaultFlag = -1;
     self.backgroundColor = [UIColor whiteColor];
 }
 
@@ -103,12 +123,27 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
         NSString *horizontalConstraints = [NSString stringWithFormat:@"H:|-%f-[_collectionView]-%f-|",.0,.0];
         [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:horizontalConstraints options:0 metrics:nil views:views]];
         [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:verticalConstraints options:0 metrics:nil views:views]];
-        if (!_defaultSelectedIndex) {
-            [self setDefaultSelectedIndex:0];
-        }
+    }
+    if (!_defaultSelectedIndex) {
+        [self setDefaultSelectedIndex:0];
     }
     if (!self.indicatorView.superview) {
         [self.collectionView addSubview:self.indicatorView];
+    }
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    [self autoCenter];
+    if (self.tabbarTitles.count && _defaultFlag > -1) {
+        if (_defaultSelectedIndex < _tabbarTitles.count) {
+            [self setSelectedWithIndex:_defaultSelectedIndex];
+            [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:_defaultSelectedIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:false];
+            _defaultFlag = -1;
+        } else {
+            NSLog(@"ERROR");
+        }
     }
 }
 
@@ -155,8 +190,8 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
     CMTabbarItem *item = self.tabbarTitles[indexPath.row];
     cell.title = item.tabTitle;
     cell.textColor = item.isSelected ? self.selectedAttributes[NSForegroundColorAttributeName] : self.normalAttributes[NSForegroundColorAttributeName];
-    if ((!self.haveShowedDefault && indexPath.row == self.defaultSelectedIndex)) {
-        _haveShowedDefault = true;
+    if ((!_haveShowedDefault && indexPath.row == self.defaultSelectedIndex)) {
+        self.haveShowedDefault = true;
         [self updateTabWithCurrentCell:cell nextCell:nil progress:1.0f backwards:true];
         [self updateIndicatorWithCell:cell indexPath:indexPath animate:false];
     }
@@ -202,7 +237,7 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
         return ;
     }
     NSMutableArray *mutaArray = [NSMutableArray array];
-    
+    _defaultFlag = 0;
     CGFloat allWidth = 0.0;
     for (NSString *str in array) {
         @autoreleasepool {
@@ -216,22 +251,15 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
             }
         }
     }
-    if (_needAutoCenter) {
-        if (allWidth + (array.count+1) * CMTabbarViewDefaultPadding < self.collectionView.bounds.size.width) {
-            UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
-            CGFloat space = self.collectionView.bounds.size.width - allWidth + (array.count+1) * CMTabbarViewDefaultPadding;
-            CGFloat InteritemSpacing = space / (array.count+1) - CMTabbarViewDefaultPadding;
-            layout.minimumInteritemSpacing = InteritemSpacing;
-            layout.minimumLineSpacing = InteritemSpacing;
-            layout.sectionInset = UIEdgeInsetsMake(0, InteritemSpacing, 0, 0);
-        }
-    }
+    self.allItemsWidth = allWidth;
     if (self.tabbarOffsetX == CMTabBarViewTabOffsetInvalid && _defaultSelectedIndex < mutaArray.count) {
         CMTabbarItem *item = mutaArray[_defaultSelectedIndex];
         item.selected = true;
     }
     self.tabbarTitles = [mutaArray copy];
     [self.collectionView reloadData];
+    [self setNeedsLayout];
+    [self layoutIfNeeded];
 }
 
 - (void)setContentInset:(UIEdgeInsets)contentInset
@@ -270,8 +298,7 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
     if ((self.tabbarOffsetX == CMTabBarViewTabOffsetInvalid) || (_defaultSelectedIndex != defaultSelectedIndex)) {
         self.haveShowedDefault = false;
         _tabbarOffsetX = defaultSelectedIndex;
-        _defaultSelectedIndex = defaultSelectedIndex;
-        [self setSelectedWithIndex:defaultSelectedIndex];
+        _defaultFlag = _defaultSelectedIndex = defaultSelectedIndex;
     }
 }
 
@@ -509,4 +536,72 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
     return mid;
 }
 
+- (void)autoCenter
+{
+    if (_needAutoCenter && self.tabbarTitles.count) {
+        if (_allItemsWidth + (self.tabbarTitles.count+1) * CMTabbarViewDefaultPadding < self.collectionView.bounds.size.width) {
+            UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
+            CGFloat space = self.collectionView.bounds.size.width - _allItemsWidth + (self.tabbarTitles.count+1) * CMTabbarViewDefaultPadding;
+            CGFloat InteritemSpacing = space / (self.tabbarTitles.count+1) - CMTabbarViewDefaultPadding;
+            layout.minimumInteritemSpacing = InteritemSpacing;
+            layout.minimumLineSpacing = InteritemSpacing;
+            layout.sectionInset = UIEdgeInsetsMake(0, InteritemSpacing, 0, 0);
+        }
+    }
+}
+
 @end
+
+@implementation CMTabbarCollectionViewCell
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.titleLabel = [UILabel new];
+        self.titleLabel.textAlignment = NSTextAlignmentCenter;
+        [self addSubview:self.titleLabel];
+        
+        self.titleLabel.translatesAutoresizingMaskIntoConstraints = false;
+        NSDictionary *views = NSDictionaryOfVariableBindings(_titleLabel);
+        NSString *verticalConstraints = [NSString stringWithFormat:@"V:|-%f-[_titleLabel]-%f-|", .0,.0];
+        NSString *horizontalConstraints = [NSString stringWithFormat:@"H:|-%f-[_titleLabel]-%f-|",.0,.0];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:horizontalConstraints options:0 metrics:nil views:views]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:verticalConstraints options:0 metrics:nil views:views]];
+        
+    }
+    return self;
+}
+
+- (void)prepareForReuse
+{
+    self.title = nil;
+    self.textColor = nil;
+    [super prepareForReuse];
+}
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    // Initialization code
+}
+
+- (void)setTitle:(NSString *)title
+{
+    _title = title;
+    self.titleLabel.text = title;
+}
+
+- (void)setTextFont:(UIFont *)textFont
+{
+    _textFont = textFont;
+    self.titleLabel.font = textFont;
+}
+
+- (void)setTextColor:(UIColor *)textColor
+{
+    _textColor = textColor;
+    self.titleLabel.textColor = textColor;
+}
+
+@end
+

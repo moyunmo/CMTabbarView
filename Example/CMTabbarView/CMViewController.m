@@ -8,9 +8,9 @@
 
 #import "CMViewController.h"
 #import "CMTabbarView.h"
-#import "CMTabbarCollectionViewCell.h"
+#import "DemoCell.h"
 
-static NSUInteger const kCMDefaultSelected = 2;
+static NSUInteger const kCMDefaultSelected = 1;
 
 @interface CMViewController ()<CMTabbarViewDelegate,CMTabbarViewDatasouce,UICollectionViewDataSource,UICollectionViewDelegate>
 
@@ -29,8 +29,7 @@ static NSUInteger const kCMDefaultSelected = 2;
     [self.view addSubview:self.tabbarView];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        self.datas = @[@"Moyun",@"Penny",@"MoyunMoyun",@"M",@"Pe",@"Moy",@"Moyun",@"Penny",@"Swift",@"Objective-C",@"C++",@"JAVA",@"C"];
-        self.datas = @[@"Moyun",@"Penny"];
+        self.datas = @[@"Objective-C",@"Swift",@"Ruby",@"C++",@"JAVA",@"C",@"Apple",@"iPhone",@"iOS",@"Orange",@"Moyun",@"Penny",@"Module-Class-Class",@"Class",@"Class"];
         [self.collectionView reloadData];
         [self.tabbarView reloadData];
         self.collectionView.contentOffset = CGPointMake(self.view.bounds.size.width*kCMDefaultSelected, 0);
@@ -63,7 +62,7 @@ static NSUInteger const kCMDefaultSelected = 2;
         layout.minimumLineSpacing = 0;
         layout.minimumInteritemSpacing = 0;
         _collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
-        [_collectionView registerClass:[CMTabbarCollectionViewCell class] forCellWithReuseIdentifier:NSStringFromClass([CMTabbarCollectionViewCell class])];
+        [_collectionView registerClass:[DemoCell class] forCellWithReuseIdentifier:NSStringFromClass([DemoCell class])];
         _collectionView.dataSource = self;
         _collectionView.delegate = self;
         _collectionView.showsHorizontalScrollIndicator = false;
@@ -91,7 +90,7 @@ static NSUInteger const kCMDefaultSelected = 2;
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    CMTabbarCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([CMTabbarCollectionViewCell class]) forIndexPath:indexPath];
+    DemoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([DemoCell class]) forIndexPath:indexPath];
     cell.title = [NSString stringWithFormat:@"%ld",indexPath.row];
     return cell;
 }

@@ -10,7 +10,7 @@
 #import "CMTabbarView.h"
 #import "CMDemoCell.h"
 
-static NSInteger const kDefaultSelectedIndex = 0;
+static NSInteger const kDefaultSelectedIndex = 12;
 
 @interface ViewController ()<CMTabbarViewDelegate,CMTabbarViewDatasouce,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
@@ -25,8 +25,7 @@ static NSInteger const kDefaultSelectedIndex = 0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.datas = @[@"Moyun",@"Penny",@"MoyunMoyun",@"M",@"Pe",@"Moy",@"Moyun",@"Penny",@"Swift",@"Objective-C",@"C++",@"JAVA",@"C"];
-//    self.tabbarView.defaultSelectedIndex = kDefaultSelectedIndex;
+    self.datas = @[@"Objective-C",@"Swift",@"Ruby",@"C++",@"JAVA",@"C",@"Apple",@"iPhone",@"iOS",@"Orange",@"Moyun",@"Penny",@"Module-Class-Class",@"Class",@"Class"];
     [self.collectionView setContentOffset:CGPointMake(self.collectionView.bounds.size.width*kDefaultSelectedIndex, 0)];
     [self.tabbarView reloadData];
     [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([CMDemoCell class]) bundle:nil] forCellWithReuseIdentifier:NSStringFromClass([CMDemoCell class])];

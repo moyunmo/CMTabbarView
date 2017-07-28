@@ -84,7 +84,7 @@ extern NSString *const CMTabBoxBackgroundColor;
  */
 @property (assign, nonatomic) IBInspectable NSUInteger defaultSelectedIndex;
 /**
-  Content Inset
+ Content Inset
  */
 @property (assign, nonatomic) UIEdgeInsets contentInset;
 /**
@@ -95,7 +95,7 @@ extern NSString *const CMTabBoxBackgroundColor;
 @property (assign, nonatomic) BOOL needAutoCenter;
 /**
  Set the current selected tab
-
+ 
  @param index index
  @param animated animated
  */
@@ -104,3 +104,4 @@ extern NSString *const CMTabBoxBackgroundColor;
 - (void)reloadData;
 
 @end
+
