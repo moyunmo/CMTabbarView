@@ -1,6 +1,7 @@
 # CMTabbarView
 
-![](1.gif)
+![](2.gif)
+![](3.gif)
 
 [![CI Status](http://img.shields.io/travis/momo605654602@gmail.com/CMTabbarView.svg?style=flat)](https://travis-ci.org/momo605654602@gmail.com/CMTabbarView)
 [![Version](https://img.shields.io/cocoapods/v/CMTabbarView.svg?style=flat)](http://cocoapods.org/pods/CMTabbarView)

@@ -10,7 +10,7 @@
 #import "CMTabbarView.h"
 #import "DemoCell.h"
 
-static NSUInteger const kCMDefaultSelected = 1;
+static NSUInteger const kCMDefaultSelected = 0;
 
 @interface CMViewController ()<CMTabbarViewDelegate,CMTabbarViewDatasouce,UICollectionViewDataSource,UICollectionViewDelegate>
 
@@ -43,7 +43,8 @@ static NSUInteger const kCMDefaultSelected = 1;
         _tabbarView.delegate = self;
         _tabbarView.dataSource = self;
         _tabbarView.defaultSelectedIndex = kCMDefaultSelected;
-        //_tabbarView.selectionType = CMTabbarSelectionBox;
+//        _tabbarView.indicatorScrollType = CMTabbarIndicatorScrollTypeWeibo;
+        _tabbarView.selectionType = CMTabbarSelectionBox;
         //_tabbarView.indicatorAttributes = @{CMTabIndicatorColor:[UIColor orangeColor]};
         //_tabbarView.normalAttributes = @{NSForegroundColorAttributeName:[UIColor blackColor]};
         //_tabbarView.selectedAttributes = @{NSForegroundColorAttributeName:[UIColor orangeColor]};
@@ -92,6 +93,8 @@ static NSUInteger const kCMDefaultSelected = 1;
 {
     DemoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([DemoCell class]) forIndexPath:indexPath];
     cell.title = [NSString stringWithFormat:@"%ld",indexPath.row];
+    
+//    cell.backgroundColor = indexPath.row % 2 ? [UIColor orangeColor] : [UIColor yellowColor];
     return cell;
 }
 

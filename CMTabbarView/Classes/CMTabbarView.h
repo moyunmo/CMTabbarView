@@ -21,6 +21,11 @@ typedef NS_ENUM(NSInteger, CMTabbarIndicatorType) {
     CMTabbarIndicatorLocationNone
 };
 
+typedef NS_ENUM(NSInteger, CMTabbarIndicatorScrollType) {
+    CMTabbarIndicatorScrollTypeDefault,
+    CMTabbarIndicatorScrollTypeWeibo
+};
+
 extern NSString *const CMTabIndicatorViewHeight;
 
 extern NSString *const CMTabIndicatorColor;
@@ -91,6 +96,10 @@ extern NSString *const CMTabBoxBackgroundColor;
  The tab offsetX of the View.
  */
 @property (assign, nonatomic) CGFloat tabbarOffsetX;
+/**
+ The scroll Type of the Indicator
+ */
+@property (assign, nonatomic) CMTabbarIndicatorScrollType indicatorScrollType;
 
 @property (assign, nonatomic) BOOL needAutoCenter;
 /**

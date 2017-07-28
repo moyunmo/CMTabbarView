@@ -109,6 +109,7 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
     _defaultSelectedIndex = 0;
     _needAutoCenter = true;
     _defaultFlag = -1;
+    _indicatorScrollType = CMTabbarIndicatorScrollTypeDefault;
     self.backgroundColor = [UIColor whiteColor];
 }
 
@@ -320,6 +321,8 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
         self.indicatorView.layer.cornerRadius = 3.0f;
     } else if (selectionType == CMTabbarSelectionIndicator) {
         self.indicatorView.backgroundColor = _indicatorAttributes[CMTabIndicatorColor];
+        self.indicatorView.layer.cornerRadius = 1.0f;
+        self.indicatorView.layer.masksToBounds = true;
     }
 }
 
@@ -448,7 +451,7 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
     if (tabOffset < .0f) {
         CMTabbarCollectionViewCell *cell = [self cellAtIndex:0];
         [self updateTabWithCurrentCell:cell nextCell:cell progress:1.0f backwards:false];
-        [self updateTabIndicatorWithCurrentCell:cell nextCell:cell progress:1.0f];
+        [self updateTabIndicatorWithCurrentCell:cell nextCell:cell progress:1.0f backWards:false];
         [self setSelectedWithIndex:0];
     } else if (tabOffset > self.tabbarTitles.count - 1) {
         CMTabbarCollectionViewCell *cell = [self cellAtIndex:self.tabbarTitles.count - 1];
@@ -457,7 +460,7 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
             return ;
         }
         [self updateTabWithCurrentCell:cell nextCell:cell progress:1.0f backwards:false];
-        [self updateTabIndicatorWithCurrentCell:cell nextCell:cell progress:1.0f];
+        [self updateTabIndicatorWithCurrentCell:cell nextCell:cell progress:1.0f backWards:false];
         [self setSelectedWithIndex:self.tabbarTitles.count - 1];
     } else {
         if (fabs(progress) != .0f) {
@@ -471,7 +474,7 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
             }
             if ((currentCell && nextCell) && currentCell != nextCell) {
                 [self updateTabWithCurrentCell:currentCell nextCell:nextCell progress:progress backwards:isBackwards];
-                [self updateTabIndicatorWithCurrentCell:currentCell nextCell:nextCell progress:progress];
+                [self updateTabIndicatorWithCurrentCell:currentCell nextCell:nextCell progress:progress backWards:isBackwards];
             }
         } else {
             NSInteger index = ceil(tabOffset);
@@ -502,7 +505,7 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
     }
 }
 
-- (void)updateTabIndicatorWithCurrentCell:(CMTabbarCollectionViewCell *)currentCell nextCell:(CMTabbarCollectionViewCell *)nextCell progress:(CGFloat)progress
+- (void)updateTabIndicatorWithCurrentCell:(CMTabbarCollectionViewCell *)currentCell nextCell:(CMTabbarCollectionViewCell *)nextCell progress:(CGFloat)progress backWards:(BOOL)backWards
 {
     if (!self.tabbarTitles.count) {
         return;
@@ -519,8 +522,22 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
     CGFloat nextTabWidth = nextCell.frame.size.width;
     CGFloat widthDiff = (nextTabWidth - currentTabWidth) * progress;
     
-    CGFloat newX = minX + ((maxX - minX) * progress);
-    CGFloat newWidth = currentTabWidth + widthDiff;
+    CGFloat newX = .0f;
+    CGFloat newWidth = .0f;
+    if (_indicatorScrollType == CMTabbarIndicatorScrollTypeDefault) {
+        newX = minX + ((maxX - minX) * progress);
+        newWidth = currentTabWidth + widthDiff;
+    } else if (_indicatorScrollType == CMTabbarIndicatorScrollTypeWeibo) {
+        if (![currentCell isEqual:nextCell]) {
+            if (progress < 0.5) {
+                newX = minX;
+                newWidth = currentTabWidth + (nextTabWidth+2*self.tabPadding) * progress*2;
+            } else {
+                newX = minX + (currentTabWidth+2*self.tabPadding)*(progress-0.5)*2;
+                newWidth = (currentTabWidth + nextTabWidth+2*self.tabPadding) - (progress-0.5)*2*(currentTabWidth+2*self.tabPadding);
+            }
+        }
+    }
     [self updateIndicatorFrameWithOriginX:newX width:newWidth];
 }
 
