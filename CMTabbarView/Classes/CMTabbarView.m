@@ -173,6 +173,7 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
         _indicatorView = [UIView new];
         _indicatorView.userInteractionEnabled = false;
         _indicatorView.backgroundColor = _indicatorAttributes[CMTabIndicatorColor];
+        _indicatorView.layer.cornerRadius = 1.0f;
     }
     return _indicatorView;
 }
@@ -279,6 +280,10 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
 - (void)setTabPadding:(CGFloat)tabPadding
 {
     _tabPadding = tabPadding;
+    UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
+    layout.minimumLineSpacing = tabPadding;
+    layout.minimumInteritemSpacing = tabPadding;
+    layout.sectionInset = UIEdgeInsetsMake(0, tabPadding/2, 0, tabPadding/2);
     [self.collectionView reloadData];
 }
 
@@ -393,10 +398,8 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
 
 - (void)updateIndicatorFrameWithOriginX:(CGFloat)originX width:(CGFloat)width
 {
-    width -= self.tabPadding;
-    originX += (self.tabPadding/2.0f);
-    width -= self.tabPadding;
-    originX += (self.tabPadding/2.0f);
+    width -= self.tabPadding*2;
+    originX += (self.tabPadding/2.0f)*2;
     CGFloat indicatorHeight = [self.indicatorAttributes[CMTabIndicatorViewHeight] floatValue];
     if (_selectionType == CMTabbarSelectionIndicator) {
         if (_locationType != CMTabbarIndicatorLocationNone) {
@@ -455,7 +458,7 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
         [self setSelectedWithIndex:0];
     } else if (tabOffset > self.tabbarTitles.count - 1) {
         CMTabbarCollectionViewCell *cell = [self cellAtIndex:self.tabbarTitles.count - 1];
-        if (![self.collectionView.visibleCells containsObject:cell]) { //fix edge
+        if (![self.collectionView.visibleCells containsObject:cell]) {
             [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:self.tabbarTitles.count - 1 inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:false];
             return ;
         }
@@ -527,15 +530,20 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
     if (_indicatorScrollType == CMTabbarIndicatorScrollTypeDefault) {
         newX = minX + ((maxX - minX) * progress);
         newWidth = currentTabWidth + widthDiff;
-    } else if (_indicatorScrollType == CMTabbarIndicatorScrollTypeWeibo) {
+    } else if (_indicatorScrollType == CMTabbarIndicatorScrollTypeSpring) {
+        UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
+        CGFloat pading = layout.minimumInteritemSpacing-layout.sectionInset.left;
         if (![currentCell isEqual:nextCell]) {
             if (progress < 0.5) {
                 newX = minX;
-                newWidth = currentTabWidth + (nextTabWidth+2*self.tabPadding) * progress*2;
+                newWidth = currentTabWidth + (nextTabWidth+2*pading) * progress*2;
             } else {
-                newX = minX + (currentTabWidth+2*self.tabPadding)*(progress-0.5)*2;
-                newWidth = (currentTabWidth + nextTabWidth+2*self.tabPadding) - (progress-0.5)*2*(currentTabWidth+2*self.tabPadding);
+                newX = minX + (currentTabWidth+2*pading)*(progress-0.5)*2;
+                newWidth = (currentTabWidth + nextTabWidth+2*pading) - (progress-0.5)*2*(currentTabWidth+2*pading);
             }
+        } else {
+            newX = minX + ((maxX - minX) * progress);
+            newWidth = currentTabWidth + widthDiff;
         }
     }
     [self updateIndicatorFrameWithOriginX:newX width:newWidth];
@@ -556,14 +564,24 @@ NSString *  const CMTabBoxBackgroundColor = @"CMBoxbackgroundColor";
 - (void)autoCenter
 {
     if (_needAutoCenter && self.tabbarTitles.count) {
+        UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
         if (_allItemsWidth + (self.tabbarTitles.count+1) * CMTabbarViewDefaultPadding < self.collectionView.bounds.size.width) {
-            UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
             CGFloat space = self.collectionView.bounds.size.width - _allItemsWidth + (self.tabbarTitles.count+1) * CMTabbarViewDefaultPadding;
-            CGFloat InteritemSpacing = space / (self.tabbarTitles.count+1) - CMTabbarViewDefaultPadding;
-            layout.minimumInteritemSpacing = InteritemSpacing;
-            layout.minimumLineSpacing = InteritemSpacing;
-            layout.sectionInset = UIEdgeInsetsMake(0, InteritemSpacing, 0, 0);
+            CGFloat interitemSpacing = (space) / (self.tabbarTitles.count+1)-5.0f; // 用collectionView 没办法精确计算，只能相对
+            layout.minimumInteritemSpacing = interitemSpacing;
+            layout.minimumLineSpacing = interitemSpacing;
+            layout.sectionInset = UIEdgeInsetsMake(0, interitemSpacing/2, 0, interitemSpacing/2);
+        } else {
+            layout.minimumLineSpacing = CMTabbarViewDefaultPadding;
+            layout.minimumInteritemSpacing = CMTabbarViewDefaultPadding;
+            layout.sectionInset = UIEdgeInsetsMake(0, CMTabbarViewDefaultPadding/2, 0, CMTabbarViewDefaultPadding/2);
         }
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            if (_tabbarOffsetX > -1) {
+                NSInteger index = ceil(_tabbarOffsetX);
+                [self updateTabbarForIndex:index animated:YES];
+            }
+        });
     }
 }
 

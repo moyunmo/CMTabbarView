@@ -23,7 +23,7 @@ typedef NS_ENUM(NSInteger, CMTabbarIndicatorType) {
 
 typedef NS_ENUM(NSInteger, CMTabbarIndicatorScrollType) {
     CMTabbarIndicatorScrollTypeDefault,
-    CMTabbarIndicatorScrollTypeWeibo
+    CMTabbarIndicatorScrollTypeSpring
 };
 
 extern NSString *const CMTabIndicatorViewHeight;
@@ -55,15 +55,17 @@ extern NSString *const CMTabBoxBackgroundColor;
  */
 @property (assign, nonatomic) BOOL needTextGradient;
 /**
- Specifies the type of selection
- Default is CMTabbarSelectionIndicator
+ Specifies the type of selection (CMTabbarSelectionIndicator,CMTabbarSelectionBox)
  */
 @property (assign, nonatomic) CMTabbarSelectionType selectionType;
 /**
- Specifies the type of indication
- Default is CMTabbarIndicatorLocationDown
+ Specifies the type of indication(CMTabbarIndicatorLocationDown,CMTabbarIndicatorLocationUp,CMTabbarIndicatorLocationNone)
  */
 @property (assign, nonatomic) CMTabbarIndicatorType locationType;
+/**
+ The scroll Type of the Indicator (CMTabbarIndicatorScrollTypeDefault,CMTabbarIndicatorScrollTypeSpring)
+ */
+@property (assign, nonatomic) CMTabbarIndicatorScrollType indicatorScrollType;
 /**
  The attributes for the tab indicator(CMTabIndicatorViewHeight,CMTabIndicatorColor,CMTabBoxBackgroundColor)
  */
@@ -96,10 +98,6 @@ extern NSString *const CMTabBoxBackgroundColor;
  The tab offsetX of the View.
  */
 @property (assign, nonatomic) CGFloat tabbarOffsetX;
-/**
- The scroll Type of the Indicator
- */
-@property (assign, nonatomic) CMTabbarIndicatorScrollType indicatorScrollType;
 
 @property (assign, nonatomic) BOOL needAutoCenter;
 /**

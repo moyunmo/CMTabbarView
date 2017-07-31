@@ -25,10 +25,10 @@ static NSUInteger const kCMDefaultSelected = 0;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.datas = @[@"Objective-C",@"Swift",@"Ruby"];
     [self.view insertSubview:self.collectionView belowSubview:self.tabbarView];
     [self.view addSubview:self.tabbarView];
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.datas = @[@"Objective-C",@"Swift",@"Ruby",@"C++",@"JAVA",@"C",@"Apple",@"iPhone",@"iOS",@"Orange",@"Moyun",@"Penny",@"Module-Class-Class",@"Class",@"Class"];
         [self.collectionView reloadData];
         [self.tabbarView reloadData];
@@ -43,7 +43,8 @@ static NSUInteger const kCMDefaultSelected = 0;
         _tabbarView.delegate = self;
         _tabbarView.dataSource = self;
         _tabbarView.defaultSelectedIndex = kCMDefaultSelected;
-//        _tabbarView.indicatorScrollType = CMTabbarIndicatorScrollTypeWeibo;
+        _tabbarView.indicatorScrollType = CMTabbarIndicatorScrollTypeSpring;
+//        _tabbarView.tabPadding = 5.0f;
 //        _tabbarView.selectionType = CMTabbarSelectionBox;
         //_tabbarView.indicatorAttributes = @{CMTabIndicatorColor:[UIColor orangeColor]};
         //_tabbarView.normalAttributes = @{NSForegroundColorAttributeName:[UIColor blackColor]};

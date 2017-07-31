@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'CMTabbarView'
-  s.version          = '0.1.5'
+  s.version          = '0.2.0'
   s.summary          = 'CMTabbarView is a scrolling tab bar,provides a simple to implement view'
 
   s.description      = 'CMTabbarView is a scrolling tab bar,provides a simple to implement view like NetEase News'
